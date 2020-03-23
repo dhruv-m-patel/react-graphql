@@ -54,8 +54,8 @@ export default function Page({
       <div className={cx('app')}>
         <header className={cx('appHeader')}>
           <img src="/images/react.svg" className={cx('appLogo')} alt="logo" />
-          <h2>React App</h2>
-          <small>A React starter app with SSR support.</small>
+          <h2>React GraphQL App</h2>
+          <small>A React starter app with GraphQL support.</small>
         </header>
         <br />
         <br />
