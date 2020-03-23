@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { Provider } from 'react-redux';
 import path from 'path';
 import { StaticRouter } from 'react-router-dom';
 import { ChunkExtractor } from '@loadable/server'
-import createStore from '../../client/store';
-import { DEFAULT_STATE } from '../../client/redux/reducers';
 import Router from '../../common/router';
 
 export default function () {
@@ -29,17 +26,9 @@ export default function () {
       return;
     }
 
-    const store = createStore(req.initialState || DEFAULT_STATE);
-    const preloadedState = req.initialState || store.getState();
-    if (!req.initialState) {
-      req.initialState = preloadedState;
-    }
-
     const application = extractor.collectChunks(
       <StaticRouter location={req.url} context={context}>
-        <Provider store={store}>
-          <Router />
-        </Provider>
+        <Router />
       </StaticRouter>
     );
     const html = ReactDOMServer.renderToString(application);
@@ -54,7 +43,6 @@ export default function () {
           <title>${req.config.get('title')}</title>
           ${extractor.getLinkTags()}
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous" />
-          <script id="stateData">window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')};</script>
           ${extractor.getStyleTags()}
         </head>
         <body>

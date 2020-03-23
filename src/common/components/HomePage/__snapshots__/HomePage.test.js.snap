@@ -39,10 +39,10 @@ exports[`HomePage it should render 1`] = `
         src="/images/react.svg"
       />
       <h2>
-        React App
+        React GraphQL App
       </h2>
       <small>
-        A React starter app with SSR support.
+        A React starter app with GraphQL support.
       </small>
     </header>
     <br />
@@ -64,7 +64,7 @@ exports[`HomePage it should render 1`] = `
               React v16.8
             </li>
             <li>
-              Redux
+              GraphQL
             </li>
             <li>
               React Router
@@ -109,14 +109,6 @@ exports[`HomePage it should render 1`] = `
               React Bootstrap
             </li>
           </ul>
-          <br />
-          <br />
-          <a
-            href="/redux-example"
-            onClick={[Function]}
-          >
-            View Example Page with Redux integration
-          </a>
         </div>
       </div>
     </div>

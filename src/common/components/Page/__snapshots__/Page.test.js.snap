@@ -39,10 +39,10 @@ exports[`Page it should render 1`] = `
         src="/images/react.svg"
       />
       <h2>
-        React App
+        React GraphQL App
       </h2>
       <small>
-        A React starter app with SSR support.
+        A React starter app with GraphQL support.
       </small>
     </header>
     <br />

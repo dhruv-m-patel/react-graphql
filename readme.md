@@ -1,13 +1,13 @@
-# react-app
+# react-graphql
 
-React app with SSR / Redux / Configuration / Code Splitting support
+A React app with SSR / GraphQL / Configuration / Code Splitting support
 
-![CI Status](https://github.com/dhruv-m-patel/react-app/workflows/Continuous%20Integration/badge.svg)
+![CI Status](https://github.com/dhruv-m-patel/react-graphql/workflows/Continuous%20Integration/badge.svg)
 
 ### Setup
 
 ```
-$ git clone git@github.com:dhruv-m-patel/react-app.git
+$ git clone git@github.com:dhruv-m-patel/react-graphql.git
 $ npm install
 $ npm run start-dev
 ```
@@ -50,6 +50,7 @@ $ npm run start-dev
 
 ### Made with:
 - React v16.8
+- GraphQL
 - Webpack v4
 - Babel v7
 - Express v4
