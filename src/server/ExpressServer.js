@@ -3,6 +3,7 @@ import http from 'http';
 import confit from 'confit';
 import express from 'express';
 import meddleware from 'meddleware';
+import { ApolloServer } from 'apollo-server';
 import handlers from 'shortstop-handlers';
 import shortstopRegex from 'shortstop-regex';
 import 'fetch-everywhere';
@@ -10,6 +11,9 @@ import getConfiguration from '../lib/utils/getConfiguration'
 import betterRequire from '../lib/utils/betterRequire'
 import { connectMysqlDb } from '../lib/clients/mysql'
 import { connectPostgresDb } from '../lib/clients/postgres'
+import typeDefs from './schema';
+import resolvers from './resolvers';
+import { models, db } from './models';
 
 export default class ExpressServer {
   constructor() {
@@ -82,6 +86,14 @@ export default class ExpressServer {
           console.log(`Error connecting to database: ${err.message}`, err.stack);
         });
     }
+
+    new ApolloServer({
+      typeDefs,
+      resolvers,
+      context() {
+        return { models, db }
+      },
+    }).listen().then(({ url }) => { console.log(`GraphQL Server is ready at ${url}`); });
 
     const middleware = config.get('meddleware');
     if (middleware) {
