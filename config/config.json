@@ -1,0 +1,90 @@
+{
+  "title": "React App",
+  "trustProxy": true,
+  "logging": {
+    "format": "combined",
+    "options": {}
+  },
+  "db": {
+    "dbType": "env:DB_DRIVER"
+  },
+  "meddleware": {
+    "logger": {
+      "priority": 20,
+      "module": {
+        "name": "morgan",
+        "arguments": [
+          "config:logging.format",
+          "config:logging.options"
+        ]
+      }
+    },
+    "static": {
+      "priority": 21,
+      "module": {
+        "name": "express",
+        "method": "static",
+        "arguments": [
+          "path:./static"
+        ]
+      }
+    },
+    "assets": {
+      "priority": 22,
+      "module": {
+        "name": "express",
+        "method": "static",
+        "arguments": [
+          "path:./build-static"
+        ]
+      }
+    },
+    "cookie": {
+      "priority": 23,
+      "module": {
+        "name": "cookie-parser"
+      }
+    },
+    "jsonBody": {
+      "priority": 24,
+      "module": {
+        "name": "body-parser",
+        "method": "json"
+      }
+    },
+    "formBody": {
+      "priority": 25,
+      "module": {
+        "name": "body-parser",
+        "method": "urlencoded",
+        "arguments": [
+          { "extended": true }
+        ]
+      }
+    },
+    "gzipCompression": {
+      "priority": 26,
+      "module": {
+        "name": "compression"
+      }
+    },
+    "routes": {
+      "priority": 26,
+      "module": {
+        "name": "express-enrouten",
+        "arguments": [
+          {
+            "directory": "sourcepath:./server/routes"
+          }
+        ]
+      }
+    },
+    "renderPage": {
+      "priority": 100,
+      "module": {
+        "name": "sourcepath:./server/middleware/renderPage",
+        "method": "default"
+      }
+    }
+  }
+}
