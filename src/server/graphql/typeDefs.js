@@ -33,7 +33,7 @@ export default gql`
   type Query {
     users(search: SearchInput): [User]!
     user(id: ID!): User!
-    pets(search: SearchInput): [Pet]!
+    pets(search: SearchInput, ownerId: String): [Pet]!
     pet(id: ID!): Pet!
   }
 `;

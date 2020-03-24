@@ -5,7 +5,9 @@ export default {
 
       if (filters.search) {
         const { id, username } = filters.search;
-        return allUsers.filter(user => user.id.toString() === id || user.username.toLowerCase().includes(username?.toLowerCase()));
+        return allUsers.filter(user => (id && user.id?.toString() === id) ||
+          (username && user.username.toLowerCase().includes(username?.toLowerCase()))
+        );
       }
 
       return allUsers;
@@ -13,7 +15,7 @@ export default {
 
     user(_, filters, { models }) {
       const { id: userId } = filters;
-      return models.User.findOne(userId);
+      return models.User.findOne(Number(userId));
     },
 
     pets(_, filters, { models }) {
@@ -22,14 +24,14 @@ export default {
       if (search) {
         const { id, name, type } = search;
         return models.Pet.getAll()
-          .filter(pet => pet.id.toString() === id ||
-            pet.name.toLowerCase().includes(name.toLowerCase()) ||
-            pet.type.toLowerCase() === type
+          .filter(pet => (id && pet.id?.toString() === id) ||
+            (name && pet.name.toLowerCase().includes(name?.toLowerCase())) ||
+            (type && pet.type?.toLowerCase() === type)
           );
       }
 
       if (ownerId) {
-        return models.Pet.getByOwnerId(ownerId);
+        return models.Pet.getByOwnerId(Number(ownerId));
       }
 
       return models.Pet.getAll();
