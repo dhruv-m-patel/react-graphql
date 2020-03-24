@@ -12,21 +12,28 @@ export default gql`
     type: PetType!
     name: String!
     createdAt: String!
+    ownerId: String!
+    owner: User
   }
 
   type User {
     id: ID!
     username: String!
-    pets: [Pet!]
+    pets: [Pet]
   }
 
-  input PetsInput {
-    type: PetType
+  input SearchInput {
+    id: String
+    username: String
+    name: String
+    type: String
+    createdAt: String
   }
 
   type Query {
-    user: User!
-    pets(input: PetsInput): [Pet]!
+    users(search: SearchInput): [User]!
+    user(id: ID!): User!
+    pets(search: SearchInput): [Pet]!
     pet(id: ID!): Pet!
   }
 `;

@@ -11,9 +11,9 @@ import getConfiguration from '../lib/utils/getConfiguration'
 import betterRequire from '../lib/utils/betterRequire'
 import { connectMysqlDb } from '../lib/clients/mysql'
 import { connectPostgresDb } from '../lib/clients/postgres'
-import typeDefs from './schema';
-import resolvers from './resolvers';
-import { models, db } from './models';
+import typeDefs from './graphql/typeDefs';
+import resolvers from './graphql/resolvers';
+import { models, db } from './graphql/models';
 
 export default class ExpressServer {
   constructor() {
@@ -74,6 +74,7 @@ export default class ExpressServer {
       this.app.use(require('webpack-hot-middleware')(compiler));
     }
 
+    // Add db support for mysql/postgres if necessary
     const dbType = config.get('db:dbType');
     if (['mysql', 'pg'].includes(dbType)) {
       const connectDb = dbType === 'mysql' ? connectMysqlDb : connectPostgresDb;
@@ -87,6 +88,7 @@ export default class ExpressServer {
         });
     }
 
+    // Configure ApolloServer to run GraphQL queries
     new ApolloServer({
       typeDefs,
       resolvers,
