@@ -3,7 +3,7 @@ import http from 'http';
 import confit from 'confit';
 import express from 'express';
 import meddleware from 'meddleware';
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer } from 'apollo-server-express';
 import handlers from 'shortstop-handlers';
 import shortstopRegex from 'shortstop-regex';
 import 'fetch-everywhere';
@@ -89,13 +89,17 @@ export default class ExpressServer {
     }
 
     // Configure ApolloServer to run GraphQL queries
-    new ApolloServer({
+    const apolloServer = new ApolloServer({
       typeDefs,
       resolvers,
       context() {
         return { models, db }
       },
-    }).listen().then(({ url }) => { console.log(`GraphQL Server is ready at ${url}`); });
+    });
+    apolloServer.applyMiddleware({
+      app: this.app,
+      path: '/graphql',
+    });
 
     const middleware = config.get('meddleware');
     if (middleware) {
