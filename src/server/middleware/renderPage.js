@@ -3,7 +3,9 @@ import ReactDOMServer from 'react-dom/server';
 import path from 'path';
 import { StaticRouter } from 'react-router-dom';
 import { ChunkExtractor } from '@loadable/server'
+import { ApolloProvider } from '@apollo/react-hooks';
 import Router from '../../common/router';
+import graphqlClient from '../../graphql/client';
 
 export default function () {
   return function renderPage (req, res) {
@@ -28,7 +30,9 @@ export default function () {
 
     const application = extractor.collectChunks(
       <StaticRouter location={req.url} context={context}>
-        <Router />
+        <ApolloProvider client={graphqlClient}>
+          <Router />
+        </ApolloProvider>
       </StaticRouter>
     );
     const html = ReactDOMServer.renderToString(application);
