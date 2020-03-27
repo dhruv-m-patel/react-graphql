@@ -11,9 +11,9 @@ import getConfiguration from '../lib/utils/getConfiguration'
 import betterRequire from '../lib/utils/betterRequire'
 import { connectMysqlDb } from '../lib/clients/mysql'
 import { connectPostgresDb } from '../lib/clients/postgres'
-import typeDefs from './graphql/typeDefs';
-import resolvers from './graphql/resolvers';
-import { models, db } from './graphql/models';
+import typeDefs from '../graphql/server/typeDefs';
+import resolvers from '../graphql/server/resolvers';
+import { models, db } from '../graphql/server/models';
 
 export default class ExpressServer {
   constructor() {
