@@ -109,6 +109,25 @@ exports[`HomePage it should render 1`] = `
               React Bootstrap
             </li>
           </ul>
+          <br />
+          <br />
+          <p>
+            <a
+              href="/graphql-example"
+              onClick={[Function]}
+            >
+              View example page showing GraphQL integration
+            </a>
+          </p>
+          <p>
+            <a
+              href="/graphql"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Check out the GraphQL Playground
+            </a>
+          </p>
         </div>
       </div>
     </div>
