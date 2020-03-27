@@ -8,9 +8,13 @@ A React app with SSR / GraphQL / Configuration / Code Splitting support
 
 ```
 $ git clone git@github.com:dhruv-m-patel/react-graphql.git
+$ cd react-graphql
 $ npm install
+$ cp .env.example .env
 $ npm run start-dev
 ```
+
+Visit `http://localhost:3000`
 
 ### Using this app
 
@@ -47,6 +51,13 @@ $ npm run start-dev
 - Run `npm run migration:apply:stage` to apply migration to staging database
 - Run `npm run migration:apply:prod` to apply migration to production database
 - Run `npm run migration:undo` to undo a previously ran migration, one at a time.
+
+#### GraphQL integration
+
+- The GraphQL on server side is setup with `apollo-server-express`
+- The GraphQL client is setup with `apollo-boost` and `apollo-cache-inmemory`
+- To fire queries to fetch or mutate data, you can use `useQuery` and `useMutation` hooks from `@apollo/react-hooks`
+- You can check out the GraphQL playground at `http://localhost:3000/graphql` after running application locally
 
 ### Made with:
 - React v16.8
