@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/Container';
 import classnames from 'classnames/bind';
 import DefaultHelmet from '../DefaultHelmet';
 import styles from './Page.css';
+import ThemeContext from '../../context/themeContext';
 
 const cx = classnames.bind(styles);
 
@@ -37,33 +38,37 @@ export default function Page({
       setHasSwitchedToDarkMode(shouldSetDarkModeInitially);
       store.set('enableDarkMode', shouldSetDarkModeInitially);
     }
-  }, [hasSwitchedToDarkMode])
+  }, [hasSwitchedToDarkMode]);
+
+  const theme = hasSwitchedToDarkMode ? 'darkTheme' : 'lightTheme';
 
   return (
-    <Container fluid className={cx('page', { darkTheme: hasSwitchedToDarkMode, lightTheme: !hasSwitchedToDarkMode })}>
-      <DefaultHelmet title={title} description={description} />
-      <div className={cx('textRight')}>
-        Dark Mode
-        <FontAwesomeIcon
-          icon={hasSwitchedToDarkMode ? faToggleOn : faToggleOff}
-          size="2x"
-          onClick={switchToDarkMode}
-          className={cx('clickable', 'padTop10px')}
-        />
-      </div>
-      <div className={cx('app')}>
-        <header className={cx('appHeader')}>
-          <img src="/images/react.svg" className={cx('appLogo')} alt="logo" />
-          <h2>React GraphQL App</h2>
-          <small>A React starter app with GraphQL support.</small>
-        </header>
-        <br />
-        <br />
-        <Container className={cx('content')}>
-          {children}
-        </Container>
-      </div>
-    </Container>
+    <ThemeContext.Provider value={{ theme }}>
+      <Container fluid className={cx('page', theme)}>
+        <DefaultHelmet title={title} description={description} />
+        <div className={cx('textRight')}>
+          Dark Mode
+          <FontAwesomeIcon
+            icon={hasSwitchedToDarkMode ? faToggleOn : faToggleOff}
+            size="2x"
+            onClick={switchToDarkMode}
+            className={cx('clickable', 'padTop10px')}
+          />
+        </div>
+        <div className={cx('app')}>
+          <header className={cx('appHeader')}>
+            <img src="/images/react.svg" className={cx('appLogo')} alt="logo" />
+            <h2>React GraphQL App</h2>
+            <small>A React starter app with GraphQL support.</small>
+          </header>
+          <br />
+          <br />
+          <Container className={cx('content')}>
+            {children}
+          </Container>
+        </div>
+      </Container>
+    </ThemeContext.Provider>
   );
 }
 

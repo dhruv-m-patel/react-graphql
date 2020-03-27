@@ -6,6 +6,7 @@ export default function Router() {
   return (
     <Switch>
       <Route exact path="/" component={loadable(() => import('./components/HomePage'))} />
+      <Route exact path="/graphql-example" component={loadable(() => import('./components/GraphqlExample'))} />
       <Route component={loadable(() => import('./components/NotFound'))} />
     </Switch>
   );

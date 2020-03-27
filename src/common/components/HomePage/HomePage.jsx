@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Page from '../Page';
@@ -20,6 +21,10 @@ export default function HomePage() {
             <li>Code splitting (using <a href="https://loadable-components.com/docs/getting-started/" target="blank">Loadable Components</a>)</li>
             <li>React Bootstrap</li>
           </ul>
+          <br />
+          <br />
+          <p><Link to="/graphql-example">View example page showing GraphQL integration</Link></p>
+          <p><a target="_blank" rel="noopener noreferrer" href="/graphql">Check out the GraphQL Playground</a></p>
         </Col>
       </Row>
     </Page>
