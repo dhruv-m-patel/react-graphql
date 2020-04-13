@@ -29,7 +29,7 @@
         "name": "express-enrouten",
         "arguments": [
           {
-            "directory": "sourcepath:./server/routes"
+            "directory": "codepath:./server/routes"
           }
         ]
       }
@@ -37,7 +37,7 @@
     "renderPage": {
       "priority": 100,
       "module": {
-        "name": "sourcepath:./server/middleware/renderPage",
+        "name": "codepath:./server/middleware/renderPage",
         "method": "default"
       }
     }
